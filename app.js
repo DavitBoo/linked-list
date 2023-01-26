@@ -9,7 +9,7 @@ class LinkedList {
         let newNode = new Node(value)
 
         if(this.head === null)
-            this.head.next = newNode
+            this.head = newNode
         else{
             let address = this.head
             while(address.next !== null){
@@ -62,12 +62,15 @@ class LinkedList {
 
     at(index){
         // returns the node at the given index
-        let address = this.head
-        index--
-        for(let i=0; i<index; i++){
-            address = address.next
-        }  
-        return address
+        if(index <= this.size()){
+            let address = this.head
+            index--
+            for(let i=0; i<index; i++){
+                address = address.next
+            }  
+            return address
+        }
+        return 0;
     }  
     
     pop(){
@@ -128,7 +131,7 @@ class LinkedList {
         }
 
         //if index === al tamaño (es decir al último), append last
-        if(index === this.size()){
+        if(index >= this.size()){
             this.append(value)
             return
         }
@@ -148,7 +151,7 @@ class LinkedList {
 
     removeAt(index) {
         // removeAt(index) that removes the node at the given index.
-        if(index <= this.size()){
+        if((index <= this.size()) && (index > 0)){
             let address = this.head
             let prev = null
             index--
@@ -157,8 +160,7 @@ class LinkedList {
                 address = address.next
             }  
             
-            console.log(address.next)
-            prev.next = (address.value, address.next)
+            prev.next = address.next
             
         }
         return
@@ -170,10 +172,11 @@ class Node {
     constructor(value = null, next = null){
         this.value = value
         this.next = next
-       // this.address 
     }
 }
 
+
+//testing
 const myList = new LinkedList
 myList.size();
 myList.append(2)
@@ -190,11 +193,13 @@ myList.append(5)
 console.log(myList.contains(3))
 console.log(myList.find(5))
 myList.removeAt(2)
+console.log(myList.toString())
 
 myList.insertAt(4, 1)
 myList.insertAt(8, 5)
 console.log(myList.size())
-myList.insertAt(6,  5)
+myList.insertAt(6, 5)
+myList.insertAt(7, 15)
 
 
 console.log(myList)
