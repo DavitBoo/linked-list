@@ -36,12 +36,9 @@ class LinkedList {
 
     size(){
         // returns the total number of nodes in the list
-        
         if(this.head !== null){
             let address = this.head
-            let nodes = 1
-            
-            
+            let nodes = 1           
             
             while(address.next !== null){
                 address = address.next
@@ -51,31 +48,76 @@ class LinkedList {
         }else console.log('The are not nodes yet')
     }
 
-    head(){
+    getHead(){
         // returns the first node in the list
+        return this.head.next;
     }
 
     tail(){
         // returns the last node in the list
+        let address = this.head
+            while(address.next !== null){
+                address = address.next
+            }
+        return address
     }
 
     at(index){
         // returns the node at the given index
+        let address = this.head
+        index--
+        for(let i=0; i<index; i++){
+            address = address.next
+        }  
+        return address
     }  
     
     pop(){
         // removes the last element from the list
+        let address = this.head
+            while(address.next.next !== null){
+                address = address.next
+            }
+
+            address.next = null
     }
 
     contains(value){
         // returns true if the passed in value is in the list and otherwise returns false.
+        let address = this.head
+            while(address.next !== null){
+                address = address.next
+                if(address.value === value){
+                    return true
+                }
+            }
+        return false
     }
+    
 
     find(value){
         // returns the index of the node containing value, or null if not found.
+        let address = this.head
+        let index = 1
+            while(address !== null){
+                if(address.value === value){
+                    return index
+                }
+                index++
+                address = address.next
+            }
+   
+        return null
     }
 
     toString (){
+        let address = this.head
+        let string = ``
+            while(address !== null){
+                string += `( ${address.value} ) -> `
+                address = address.next
+            }
+        return `${string}  null`
         // represents your LinkedList objects as strings, so you can print them out and preview them in the console. The format should be: ( value ) -> ( value ) -> ( value ) -> null
     }
 }
@@ -91,9 +133,17 @@ class Node {
 
 const myList = new LinkedList
 myList.size();
-myList.append(1)
-myList.prepend(2)
+myList.append(2)
+myList.prepend(1)
 myList.append(3)
 myList.append(4)
-myList.size();
+myList.size()
+console.log(myList.getHead()) 
+console.log(myList.tail())
+console.log(myList.at(4))
+console.log(myList.pop())
+myList.append(5)
+console.log(myList.contains(3))
+console.log(myList.find(5))
 console.log(myList)
+console.log(myList.toString())
