@@ -1,9 +1,7 @@
 class LinkedList {
-    constructor(value, index){
+    constructor(value){
         this.value = value
-        this.index = index
         this.head = null
-        this.list = []
     }
 
     append(value){
@@ -11,7 +9,7 @@ class LinkedList {
         let newNode = new Node(value)
 
         if(this.head === null)
-            this.head = newNode
+            this.head.next = newNode
         else{
             let address = this.head
             while(address.next !== null){
@@ -44,13 +42,13 @@ class LinkedList {
                 address = address.next
                 nodes++
             }
-            console.log(nodes)
+            return nodes
         }else console.log('The are not nodes yet')
     }
 
     getHead(){
         // returns the first node in the list
-        return this.head.next;
+        return this.head;
     }
 
     tail(){
@@ -125,10 +123,15 @@ class LinkedList {
     insertAt(value, index) {
     //insertAt(value, index) that inserts a new node with the provided value at the given index.
         if(index === 1){
-            //append first
+            this.prepend(value)
+            return
         }
 
         //if index === al tamaño (es decir al último), append last
+        if(index === this.size()){
+            this.append(value)
+            return
+        }
 
         let address = this.head
         let prev = null
@@ -145,17 +148,19 @@ class LinkedList {
 
     removeAt(index) {
         // removeAt(index) that removes the node at the given index.
-        let address = this.head
-        let prev = null
-        index--
-        for(let i=0; i<index; i++){
-            prev = address
-            address = address.next
-        }  
-
-        console.log(address.next)
-        prev.next = (address.value, address.next)
-       
+        if(index <= this.size()){
+            let address = this.head
+            let prev = null
+            index--
+            for(let i=0; i<index; i++){
+                prev = address
+                address = address.next
+            }  
+            
+            console.log(address.next)
+            prev.next = (address.value, address.next)
+            
+        }
         return
     }
 }
@@ -175,7 +180,8 @@ myList.append(2)
 myList.prepend(1)
 myList.append(3)
 myList.append(4)
-myList.size()
+console.log(myList.size())
+
 console.log(myList.getHead()) 
 console.log(myList.tail())
 console.log(myList.at(4))
@@ -183,10 +189,13 @@ console.log(myList.pop())
 myList.append(5)
 console.log(myList.contains(3))
 console.log(myList.find(5))
-
-myList.insertAt(4, 4)
-
 myList.removeAt(2)
+
+myList.insertAt(4, 1)
+myList.insertAt(8, 5)
+console.log(myList.size())
+myList.insertAt(6,  5)
+
 
 console.log(myList)
 console.log(myList.toString())
