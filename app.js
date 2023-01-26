@@ -1,7 +1,7 @@
 class LinkedList {
-    constructor(value){
-        this.value = value;
-        this.index = 0;
+    constructor(value, index){
+        this.value = value
+        this.index = index
         this.head = null
         this.list = []
     }
@@ -17,8 +17,6 @@ class LinkedList {
             while(address.next !== null){
                 address = address.next
             }
-            console.log(address)
-            console.log(newNode)
             address.next = newNode
         }
 
@@ -30,16 +28,27 @@ class LinkedList {
             let newNode = new Node(value)
             this.head = newNode
         }else{
-            // console.log(this.head.next)
             let newNode = new Node(value, this.head)
             this.head = newNode
-            // console.log()
         }
 
     }
 
     size(){
         // returns the total number of nodes in the list
+        
+        if(this.head !== null){
+            let address = this.head
+            let nodes = 1
+            
+            
+            
+            while(address.next !== null){
+                address = address.next
+                nodes++
+            }
+            console.log(nodes)
+        }else console.log('The are not nodes yet')
     }
 
     head(){
@@ -81,8 +90,10 @@ class Node {
 }
 
 const myList = new LinkedList
+myList.size();
 myList.append(1)
 myList.prepend(2)
 myList.append(3)
 myList.append(4)
+myList.size();
 console.log(myList)
