@@ -142,6 +142,22 @@ class LinkedList {
        
         return
     }
+
+    removeAt(index) {
+        // removeAt(index) that removes the node at the given index.
+        let address = this.head
+        let prev = null
+        index--
+        for(let i=0; i<index; i++){
+            prev = address
+            address = address.next
+        }  
+
+        console.log(address.next)
+        prev.next = (address.value, address.next)
+       
+        return
+    }
 }
 
 
@@ -169,6 +185,8 @@ console.log(myList.contains(3))
 console.log(myList.find(5))
 
 myList.insertAt(4, 4)
+
+myList.removeAt(2)
 
 console.log(myList)
 console.log(myList.toString())
