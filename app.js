@@ -117,8 +117,30 @@ class LinkedList {
                 string += `( ${address.value} ) -> `
                 address = address.next
             }
-        return `${string}  null`
+        return `${string} null`
         // represents your LinkedList objects as strings, so you can print them out and preview them in the console. The format should be: ( value ) -> ( value ) -> ( value ) -> null
+    }
+
+
+    insertAt(value, index) {
+    //insertAt(value, index) that inserts a new node with the provided value at the given index.
+        if(index === 1){
+            //append first
+        }
+
+        //if index === al tamaño (es decir al último), append last
+
+        let address = this.head
+        let prev = null
+        index--
+        for(let i=0; i<index; i++){
+            prev = address
+            address = address.next
+        }  
+
+        prev.next = new Node(value, address)
+       
+        return
     }
 }
 
@@ -127,7 +149,7 @@ class Node {
     constructor(value = null, next = null){
         this.value = value
         this.next = next
-        this.address 
+       // this.address 
     }
 }
 
@@ -145,5 +167,8 @@ console.log(myList.pop())
 myList.append(5)
 console.log(myList.contains(3))
 console.log(myList.find(5))
+
+myList.insertAt(4, 4)
+
 console.log(myList)
 console.log(myList.toString())
